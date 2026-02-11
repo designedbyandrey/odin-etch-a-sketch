@@ -10,6 +10,7 @@ button {
     font-weight: 600;
     font-size: 18px;
     border: none;
+    cursor: pointer;
 }
 
 .container {
@@ -23,13 +24,13 @@ button {
 .grid {
     display: flex;
     flex-direction: row;
-    max-width: 320px;
+    width: 740px;
     flex-wrap: wrap;
 }
 
 .grid-item {
-    width: 20px;
-    height: 20px;
+    width: 46.25px;
+    height: 46.25px;
     background-color: black;
 }
 
