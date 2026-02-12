@@ -12,6 +12,8 @@ let grid = document.querySelector(".grid");
 let mainButton = document.querySelector(".btn-main");
 let gridWidth = 740;
 let outputField = document.querySelector("#result-output")
+const gridForm = document.querySelector("#grid-form");
+
 
 //initial grid load
 for (let i = 0; i < 256; i++){
@@ -21,11 +23,16 @@ for (let i = 0; i < 256; i++){
         grid.appendChild(gridChild);
         
         gridChild.addEventListener("mouseover", () => {
+        gridChild.style.background = randomRGB()
         gridChild.classList.add("grid-hover")
         })
 
         gridChild.addEventListener("mouseout", () => {
-        gridChild.classList.remove("grid-hover")
+            setTimeout(() => {
+                gridChild.style.background = ""
+                gridChild.classList.remove("grid-hover")
+            }, 500)
+
         })
     }
 
@@ -66,11 +73,15 @@ function newGrid(gridValue) {
         grid.appendChild(gridChild);
         
         gridChild.addEventListener("mouseover", () => {
+        gridChild.style.background = randomRGB()
         gridChild.classList.add("grid-hover")
         })
 
         gridChild.addEventListener("mouseout", () => {
-        gridChild.classList.remove("grid-hover")
+            setTimeout(() => {
+                gridChild.style.background = ""
+                gridChild.classList.remove("grid-hover")
+            }, 500)
         })
     }}
 
@@ -81,8 +92,19 @@ function deleteGrid() {
 }
 
 //Running the function
-mainButton.addEventListener("click", () => {
+gridForm.addEventListener("submit", (e) => {
+    e.preventDefault()
     getInputValue();
     checkValue()
     
 })
+
+//Generate random color
+function randomRGB() {
+    let r = Math.floor(Math.random() * 256);
+    let g = Math.floor(Math.random() * 256);
+    let b = Math.floor(Math.random() * 256);
+    let randomColor = `rgb(${r}, ${g}, ${b})`;
+    return randomColor; 
+    
+}
