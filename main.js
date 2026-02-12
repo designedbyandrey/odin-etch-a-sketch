@@ -7,10 +7,13 @@
 
 */
 
+//Variables
 let grid = document.querySelector(".grid");
 let mainButton = document.querySelector(".btn-main");
 let gridWidth = 740;
+let outputField = document.querySelector("#result-output")
 
+//initial grid load
 for (let i = 0; i < 256; i++){
         let gridChild = document.createElement("div")
         gridChild.classList.add("grid-item")
@@ -26,28 +29,37 @@ for (let i = 0; i < 256; i++){
         })
     }
 
-function resetGrid() {
-    
-    deleteGrid()
+//Getting the input value of form
+function getInputValue() {
+    return inputValue = document.querySelector("#value-input").value;
+}
 
-    let isValid = false;
-    let inputValue;
 
-    while(isValid === false) {
-        inputValue = parseInt(prompt("Squares per side (max 100)"))
-        if (!isNaN(inputValue) && inputValue <= 100 && inputValue > 0) {
-            isValid = true;
+//Checks if value is between 1 and 100
+function checkValue() {
+
+    let numericValue = parseFloat(inputValue);
+
+        if (!isNaN(numericValue) && numericValue <= 100 && numericValue > 0) {
+            outputField.textContent = `Success! Value is valid. Creating a ${numericValue} x ${numericValue} grid`;
+            outputField.style.color = "green";
+            newGrid(numericValue);
+        
         } else {
-            alert("Please enter a valid number ")
+            outputField.textContent = "Please enter a valid value (1-100)";
+            outputField.style.color = "red";
         }
-    }
-    
+
+}
 
 
-    for (let i = 0; i < inputValue * inputValue; i++){
+//creates new grid based on input value
+function newGrid(gridValue) {
+    deleteGrid()
+    for (let i = 0; i < gridValue * gridValue; i++){
         let gridChild = document.createElement("div")
         gridChild.classList.add("grid-item")
-        let gridChildWidth = gridWidth/inputValue; 
+        let gridChildWidth = gridWidth/gridValue; 
 
         gridChild.style.width = `${gridChildWidth}px`
         gridChild.style.height = `${gridChildWidth}px`
@@ -60,14 +72,17 @@ function resetGrid() {
         gridChild.addEventListener("mouseout", () => {
         gridChild.classList.remove("grid-hover")
         })
-    }
+    }}
 
-}
 
+//Deleting the grid
 function deleteGrid() {
     grid.innerHTML = ''
 }
 
-mainButton.addEventListener ("click", () => {
-    resetGrid()
+//Running the function
+mainButton.addEventListener("click", () => {
+    getInputValue();
+    checkValue()
+    
 })

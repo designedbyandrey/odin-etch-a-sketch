@@ -13,6 +13,16 @@ button {
     cursor: pointer;
 }
 
+input {
+    padding: 6px 6px;
+    font-family: "Open Sans";
+    margin-bottom: 12px;
+}
+
+#result-output {
+    font-family: "Open Sans";
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -44,4 +54,5 @@ button {
     color: white;
     border-radius: 4px;
     margin-bottom: 24px;
+    margin-top: 12px;
 }
